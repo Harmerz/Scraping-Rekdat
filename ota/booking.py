@@ -43,9 +43,9 @@ def search_booking(nameHotel, start_date, end_date):
 }
   
   params = {
-    "ss": nameHotel.replace(" ", "+"),
-    "ssne": nameHotel.replace(" ", "+"),
-    "ssne_untouched": nameHotel.replace(" ", "+"),
+    "ss": nameHotel,
+    "ssne": "Yogyakarta",
+    "ssne_untouched": "Yogyakarta",
     "label": "gog235jc-1DCAEoggI46AdIM1gDaGiIAQGYARK4ARfIAQzYAQPoAQGIAgGoAgO4Auis8KoGwAIB0gIkYmM1ODNiNDctOWY4Ny00YzgyLThiZTUtYTQyOGE2NzRlZGNj2AIE4AIB",
     "sid": "6afbac45bd42a09d7b5f6c4214a06335",
     "aid": "397594",
@@ -89,16 +89,19 @@ def search_booking(nameHotel, start_date, end_date):
           # Check if the "__typename" is "Query"
           if json_data.get('ROOT_QUERY', {}).get('__typename') == 'Query':
               data = json_data["ROOT_QUERY"]["searchQueries"]
-              results_value = None
-              for key, value in data.items():
-                  if isinstance(value, dict) and "results" in value:
-                      results_value = value["results"]
-                      break
+              if data and isinstance(data, dict):
+                  results_value = None
+                  for key, value in data.items():
+                      if isinstance(value, dict) and "results" in value:
+                          results_value = value["results"]
+                          break
 
-              if results_value:
-                  return results_value
+                  if results_value:
+                      return results_value
+                  else:
+                      return data
               else:
-                  return json_data["ROOT_QUERY"]["searchQueries"]
+                  return None
 
 
 

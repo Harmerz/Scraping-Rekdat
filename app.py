@@ -57,7 +57,8 @@ def FindHotelBooking():
   file_path = 'agoda_id.csv'
   df = pd.read_csv(file_path)
   hotels = []
-  for nameHotel in df['Name']:
+  thisname = ["Arte Hotel Yogyakarta"]
+  for nameHotel in df["Name"]:
     list = []
     for i in range(3):
       original_date = datetime.strptime(f"{today}T17:00:00.000Z", "%Y-%m-%dT%H:%M:%S.%fZ")
@@ -79,6 +80,19 @@ def FindHotelBooking():
             if blocks and len(blocks) > 0:
                 if "finalPrice" in blocks[0]:
                     amount = blocks[0]["finalPrice"]["amount"]
+      if(amount == None):
+         for _ in range(3):
+            res = search_booking(nameHotel, start_date, end_date)
+            hotelFind = [hotel for hotel in res if all(word in hotel["displayName"]["text"].lower().split() for word in nameHotel.lower().split())]
+            amount = None
+            if hotelFind and len(hotelFind) > 0:
+              if "blocks" in hotelFind[0]:
+                  blocks = hotelFind[0]["blocks"]
+                  if blocks and len(blocks) > 0:
+                      if "finalPrice" in blocks[0]:
+                          amount = blocks[0]["finalPrice"]["amount"]
+            if(amount != None):
+               break
       list.append({
         "date": start_date_locale,
         "price": amount
