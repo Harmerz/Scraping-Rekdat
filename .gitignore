@@ -1,1 +1,26 @@
-__pycache__/**
+# .gitignore for Flask with virtual environment
+
+# Ignore virtual environment
+env/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment variables
+.env
+
+# IDE files
+.vscode/
+*.pycharm
+*.idea
+*.vscode
+*.code-workspace
+
+# Compiled files
+*.pyc
+
+# Logs
+*.log
