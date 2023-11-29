@@ -4,7 +4,7 @@ from .request_data import send_request
 from bs4 import BeautifulSoup
 import json
 
-idAgoda = [
+idBooking = [
     {
         "id": 1678127,
         "name": "Satoria Hotel Yogyakarta - CHSE Certified"
@@ -184,7 +184,7 @@ idAgoda = [
 ]
 
 def find_hotel_by_name(name):
-    return next((hotel for hotel in idAgoda if hotel["name"] == name), None)
+    return [hotel["id"] for hotel in idBooking if hotel["name"] == name][0]
 
 def search_booking(nameHotel, start_date, end_date):
   # Parse the input string as UTC time
@@ -249,6 +249,7 @@ def search_booking(nameHotel, start_date, end_date):
   print(start_date_locale)
   print(end_date_locale)
   print(nameHotel)
+  print(find_hotel_by_name(nameHotel))
   result = send_request(url, headers, "GET", params=params)
   # Parse the HTML using BeautifulSoup
   soup = BeautifulSoup(result, 'html.parser')
