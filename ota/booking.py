@@ -4,6 +4,188 @@ from .request_data import send_request
 from bs4 import BeautifulSoup
 import json
 
+idAgoda = [
+    {
+        "id": 1678127,
+        "name": "Satoria Hotel Yogyakarta - CHSE Certified"
+    },
+    {
+        "id": 9158876,
+        "name": "Malyabhara Hotel"
+    },
+    {
+        "id": 891281,
+        "name": "Gallery Prawirotaman Hotel"
+    },
+    {
+        "id": 1550653,
+        "name": "Allstay Ecotel Yogyakarta"
+    },
+    {
+        "id": 4308974,
+        "name": "Aveta Hotel Malioboro - CHSE Certified"
+    },
+    {
+        "id": 1439830,
+        "name": "Tjokro Style Yogyakarta"
+    },
+    {
+        "id": 1618997,
+        "name": "Grand Kangen Hotel Urip Sumoharjo"
+    },
+    {
+        "id": 1388440,
+        "name": "Hotel Neo Malioboro by ASTON"
+    },
+    {
+        "id": 4826351,
+        "name": "RedDoorz near Malioboro Mall 2"
+    },
+    {
+        "id": 8894935,
+        "name": "House Of Cokro near Malioboro Area RedPartner"
+    },
+    {
+        "id": 5989457,
+        "name": "PORTA by Ambarrukmo"
+    },
+    {
+        "id": 2242692,
+        "name": "YATS Colony"
+    },
+    {
+        "id": 2869066,
+        "name": "ARTOTEL Yogyakarta"
+    },
+    {
+        "id": 337055,
+        "name": "ARTOTEL Suites Bianti Yogyakarta, CHSE Certified"
+    },
+    {
+        "id": 4353040,
+        "name": "Arte Hotel Yogyakarta"
+    },
+    {
+        "id": 2433734,
+        "name": "GRAMM HOTEL by Ambarrukmo - Formerly Grand Ambarrukmo Yogyakarta"
+    },
+    {
+        "id": 6771182,
+        "name": "The Manohara Hotel Yogyakarta"
+    },
+    {
+        "id": 402860,
+        "name": "The Rich Jogja Hotel"
+    },
+    {
+        "id": 8510982,
+        "name": "Grand Dafam Signature International Airport Yogyakarta"
+    },
+    {
+        "id": 576313,
+        "name": "Grand Zuri Malioboro"
+    },
+    {
+        "id": 2761236,
+        "name": "Grand Rohan Jogja"
+    },
+    {
+        "id": 2278674,
+        "name": "Grand Keisha Yogyakarta"
+    },
+    {
+        "id": 1830077,
+        "name": "GAIA Cosmo Hotel"
+    },
+    {
+        "id": 1863174,
+        "name": "Swiss-Belboutique Yogyakarta"
+    },
+    {
+        "id": 267339,
+        "name": "Sahid Raya Hotel & Convention Yogyakarta"
+    },
+    {
+        "id": 335157,
+        "name": "Kimaya Sudirman Yogyakarta by Harris"
+    },
+    {
+        "id": 1957322,
+        "name": "Platinum Adisucipto Hotel & Conference Center"
+    },
+    {
+        "id": 238289,
+        "name": "Hotel Santika Premiere Jogja"
+    },
+    {
+        "id": 1314871,
+        "name": "The Alana Yogyakarta Hotel and Convention Center"
+    },
+    {
+        "id": 1322941,
+        "name": "The Alana Hotel & Conference Center Malioboro Yogyakarta by ASTON"
+    },
+    {
+        "id": 5230327,
+        "name": "Novotel Suites Yogyakarta Malioboro"
+    },
+    {
+        "id": 1623833,
+        "name": "The Atrium Hotel & Resort Yogyakarta"
+    },
+    {
+        "id": 1037300,
+        "name": "Crystal Lotus Hotel Yogyakarta"
+    },
+    {
+        "id": 245703,
+        "name": "Hotel New Saphir Yogyakarta"
+    },
+    {
+        "id": 2303435,
+        "name": "INNSiDE by Meliá Yogyakarta"
+    },
+    {
+        "id": 3539462,
+        "name": "Sofia Boutique Residence"
+    },
+    {
+        "id": 740643,
+        "name": "Eastparc Hotel Yogyakarta"
+    },
+    {
+        "id": 2761737,
+        "name": "Yogyakarta Marriott Hotel"
+    },
+    {
+        "id": 239849,
+        "name": "The Phoenix Hotel Yogyakarta - MGallery Collection"
+    },
+    {
+        "id": 259081,
+        "name": "Hyatt Regency Yogyakarta"
+    },
+    {
+        "id": 176870,
+        "name": "Melia Purosani Yogyakarta"
+    },
+    {
+        "id": 353499,
+        "name": "Jambuluwuk Malioboro Hotel Yogyakarta"
+    },
+    {
+        "id": 1850023,
+        "name": "Grand Mercure Yogyakarta Adi Sucipto"
+    },
+    {
+        "id": 383557,
+        "name": "Sheraton Mustika Yogyakarta Resort and Spa"
+    }
+]
+
+def find_hotel_by_name(name):
+    return next((hotel for hotel in idAgoda if hotel["name"] == name), None)
+
 def search_booking(nameHotel, start_date, end_date):
   # Parse the input string as UTC time
   start_date_local = datetime.strptime(start_date, "%Y-%m-%dT%H:%M:%S.%fZ").replace(tzinfo=pytz.UTC)
@@ -55,7 +237,7 @@ def search_booking(nameHotel, start_date, end_date):
     "src": "index",
     "search_selected": True,
     "search_pageview_id": "cd7f11b4a2650078",
-    "dest_id": "3539462",
+    "dest_id": find_hotel_by_name(nameHotel),
     "dest_type": "hotel",
     "checkin": start_date_locale,
     "checkout": end_date_locale,
@@ -66,7 +248,7 @@ def search_booking(nameHotel, start_date, end_date):
   }
   print(start_date_locale)
   print(end_date_locale)
-  print(nameHotel.replace(" ", "+"))
+  print(nameHotel)
   result = send_request(url, headers, "GET", params=params)
   # Parse the HTML using BeautifulSoup
   soup = BeautifulSoup(result, 'html.parser')

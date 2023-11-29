@@ -5,13 +5,13 @@ from ota.agoda import search_agoda
 from ota.booking import search_booking
 import pytz
 
- 
+
 app = Flask(__name__)
 
 @app.route("/agoda")
 def FindHotelAgoda():
   today = datetime.now().strftime("%Y-%m-%d")
-  file_path = 'agoda_id.csv'
+  file_path = 'hotel.csv'
   df = pd.read_csv(file_path)
   hotels = []
   for idHotel in df['ObjectId']:
@@ -54,10 +54,9 @@ def FindHotelAgoda():
 @app.route('/booking')
 def FindHotelBooking():
   today = datetime.now().strftime("%Y-%m-%d")
-  file_path = 'agoda_id.csv'
+  file_path = 'hotel.csv'
   df = pd.read_csv(file_path)
   hotels = []
-  thisname = ["Arte Hotel Yogyakarta"]
   for nameHotel in df["Name"]:
     list = []
     for i in range(3):

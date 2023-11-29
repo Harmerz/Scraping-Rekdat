@@ -15,7 +15,7 @@ def send_request(url, headers, method, payload=None, params=None):
                         print(f"RequestError.ErrorCode{response.status_code}")
                         return 
             else:
-                response = requests.request(method, url, headers=headers, params=params)
+                response = requests.get(url, headers=headers, params=params)
                 if response.status_code == 200:
                     result = response.text
                     return result
